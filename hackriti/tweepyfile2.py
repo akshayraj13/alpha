@@ -12,4 +12,4 @@ api = tweepy.API(auth)
 
 myStreamListener = MyStreamListener()
 myStream = tweepy.Stream(auth = api.auth, listener=myStreamListener)
-myStream.filter(track=['Aamir khan'])
+myStream.filter(track=['Donald Trump'])
