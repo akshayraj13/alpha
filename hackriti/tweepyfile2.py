@@ -3,6 +3,8 @@ import tweepy
 class MyStreamListener(tweepy.StreamListener):
 
     def on_status(self, status):
+        f=open("guru99.txt", "a+")
+        f.write(status.text)
         print(status.text)
 
 auth = tweepy.OAuthHandler('o2ipQeWmf1nRnmo9KuL54kYnr', 'hJjygIOjoS34Dv6n6DBYSzOSVHSHdey3AsaUcnpBT1A56GL9px')

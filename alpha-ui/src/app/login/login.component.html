@@ -1,7 +1,20 @@
-<h1>Loginpage</h1>
 <div class="login-page">
-  <div>
-    <label> Username</label>
-    <input>
-  </div>
+
+  <form class="login-form" [formGroup]="loginForm">
+    <div class="container">
+      <label><b>Username</b></label>
+      <input type="text" placeholder="Enter Username" formControlName="userName" name="userName">
+
+      <label><b>Password</b></label>
+      <input type="password" placeholder="Enter Password" formControlName="password" name="password" required>
+
+      <button (click)="doLogin()">Login</button>
+    </div>
+
+    <div class="container">
+      <button type="button" class="cancelbtn">Cancel</button>
+      <span class="psw">Forgot <a href="#">password?</a></span>
+    </div>
+  </form>
+
 </div>
