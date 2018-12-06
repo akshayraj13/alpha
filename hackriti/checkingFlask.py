@@ -1,6 +1,8 @@
 from flask import Flask, request
 import tweepy
 from streamListener import MyStreamListener
+import uuid
+import boto3
 app = Flask(__name__)
 
 @app.route('/')
@@ -34,10 +36,24 @@ def checkpost():
     name = req_data['name']
     trackList = req_data['track']
 
-    print('reqData', req_data)
     print('----', trackList)
+    #jobId = submitJob(trackList[0])
     livetweet(trackList)
-    return 'Hello ' + name + '!'
+    return 'Hello ' + name + '!' + 'Your job id: ' + str(jobId)
+
+def submitJob(trackword):
+    dynamodb = boto3.resource('dynamodb', region_name='us-east-1')
+    table = dynamodb.Table('jobTable')
+    jobId = uuid.uuid4()
+    table.put_item(
+        Item={
+            'jobId': str(jobId),
+            'trackWord': trackword
+        }
+    )
+    return  jobId
+
+
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000)

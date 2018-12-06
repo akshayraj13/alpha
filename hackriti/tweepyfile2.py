@@ -1,16 +1,22 @@
 import tweepy
-# override tweepy.StreamListener to add logic to on_status
-
-
+import simplejson as json
+#override tweepy.StreamListener to add logic to on_status
 class MyStreamListener(tweepy.StreamListener):
+    count = 0
+    def __init__(self, api = None):
+        super(MyStreamListener,self).__init__()
+        self.count = 0
 
     def on_status(self, status):
-        f=open("guru999.txt", "a+")
-        f.write(status.text)
-        f.write('--------->')
-        print(status)
+        if self.count == 0 :
+            self.count += 1
+            json.dumps(status._json)
+            f=open("guruG.txt", "a+")
+            f.write(json.dumps(status._json))
+            f.close()
+            print(status)
 
-        print('---------------->')
+            print('---------------->')
 
 
 auth = tweepy.OAuthHandler('o2ipQeWmf1nRnmo9KuL54kYnr', 'hJjygIOjoS34Dv6n6DBYSzOSVHSHdey3AsaUcnpBT1A56GL9px')
