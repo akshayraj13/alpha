@@ -5,16 +5,19 @@ import tweepy
 class MyStreamListener(tweepy.StreamListener):
 
     def on_status(self, status):
-        f=open("guru99.txt", "a+")
+        f=open("guru999.txt", "a+")
         f.write(status.text)
-        print(status.text)
+        f.write('--------->')
+        print(status)
+
+        print('---------------->')
 
 
 auth = tweepy.OAuthHandler('o2ipQeWmf1nRnmo9KuL54kYnr', 'hJjygIOjoS34Dv6n6DBYSzOSVHSHdey3AsaUcnpBT1A56GL9px')
 auth.set_access_token('1067670046900514816-7U45hCQmSethnnL2ApCIu4Dej1Lkh4', 'GK73yynnkFgBh4qd9SONpnNswFbQ70DmTLLeYQLYDOQNX')
 
 api = tweepy.API(auth)
-
 myStreamListener = MyStreamListener()
-myStream = tweepy.Stream(auth=api.auth, listener=myStreamListener)
-myStream.filter(track=['Donald Trump'])
+
+myStream = tweepy.Stream(auth = api.auth, listener=myStreamListener)
+myStream.filter(track=['brexit'])
